@@ -2,10 +2,16 @@ FROM node:23-alpine
 
 WORKDIR /app
 
-COPY package.json package-lock.json ./
-RUN npm install --legacy-peer-deps
+# Install pnpm globally
+RUN npm install -g pnpm
 
+# Copy the package files and install dependencies using pnpm
+COPY pnpm-lock.yaml package.json ./
+RUN pnpm install
+
+# Copy the rest of your application files
 COPY . .
 
 EXPOSE 3000
-CMD ["npm", "run", "dev"]
+
+CMD ["pnpm", "dev"]

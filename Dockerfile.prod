@@ -2,16 +2,31 @@ FROM node:23-alpine AS builder
 
 WORKDIR /app
 
-COPY package.json package-lock.json ./
-RUN npm install --production --legacy-peer-deps
+# Install pnpm globally
+RUN npm install -g pnpm
 
+# Copy lockfile and package.json for deterministic installs
+COPY pnpm-lock.yaml ./
+COPY package.json ./
+
+# Install only production dependencies
+RUN pnpm install --prod
+
+# Copy the rest of the application files
 COPY . .
-RUN npm run build
 
+# Build the application
+RUN pnpm build
+
+# Runner Stage
 FROM node:23-alpine AS runner
 
 WORKDIR /app
-COPY --from=builder /app .
+
+# Copy built files from builder stage
+COPY --from=builder /app . 
 
 EXPOSE 3000
-CMD ["npm", "run", "start"]
+
+# Use pnpm to start the application
+CMD ["pnpm", "start"]

@@ -15,10 +15,10 @@ services:
       - MINIO_ROOT_PASSWORD=${MINIO_ROOT_PASSWORD}
     volumes:
       - .:/app
+      - /app/node_modules
     depends_on:
       - postgres
       - minio
-
   # PostgreSQL database service
   postgres:
     image: postgres:17-alpine
@@ -30,7 +30,6 @@ services:
       - postgres_data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
-
   # MinIO service (for object storage)
   minio:
     image: minio/minio
