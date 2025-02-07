@@ -7,7 +7,7 @@
 	},
 	"files": {
 		"ignoreUnknown": false,
-		"ignore": ["src/components/ui"]
+		"ignore": ["src/components/ui", ".next", ".pnpm-store", "node_modules"]
 	},
 	"formatter": {
 		"enabled": true,
