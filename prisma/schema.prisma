@@ -15,16 +15,5 @@ datasource db {
 
 model User {
   id      String      @id @default(uuid())
-  createdAt DateTime @default(now())
-  email   String      @unique
-  catPics CatImage[]
-}
-
-model CatImage {
-  id       String  @id @default(uuid())
-  createdAt DateTime @default(now())
-  location Float[]
-  imageUrl String
-  User     User?   @relation(fields: [userId], references: [id])
-  userId   String?
+  name    String?  @db.VarChar(255)
 }
