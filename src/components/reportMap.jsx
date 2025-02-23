@@ -130,7 +130,7 @@ export default function ReportMap() {
           mapId={process.env.NEXT_PUBLIC_REPORTS_GOOGLE_MAP_ID_RETRO}
           defaultZoom={13}
           defaultCenter={{ lat: 14.641, lng: 121.1 }}
-          onCameraChanged={(ev: MapCameraChangedEvent) =>
+          onCameraChanged={(ev) =>
             console.log(
               "camera changed:",
               ev.detail.center,
