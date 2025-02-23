@@ -13,8 +13,35 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id   String  @id @default(uuid())
-  name String? @db.VarChar(255)
-  age  Int
+model ModeratorCredentials {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  username  String
+  password  String
+}
+
+model Report {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  lat      Float
+  lon      Float
+  location String?
+
+  timeOfReport DateTime @default(now())
+  description  String?
+  imageUrl     String[]
+  tags         Tag[]
+
+  hidden Boolean @default(false)
+}
+
+model Tag {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  name      String
+  Report    Report[]
 }
