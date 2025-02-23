@@ -185,7 +185,7 @@ export default function ReportMap() {
 			</APIProvider>
 
 			<Drawer open={isDrawerOpen} onOpenChange={setIsDrawerOpen}>
-				<DrawerContent>
+				<DrawerContent side="bottom" className="h-[85vh]">
 					<DrawerHeader>
 						<div className="img relative">
 							{isLoggedIn ? (
